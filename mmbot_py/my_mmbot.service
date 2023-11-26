@@ -1,0 +1,12 @@
+[Unit]
+Description=Trading Service Main
+
+[Service]
+Type=simple
+ExecStart=/opt/miniconda/envs/mmbot/bin/python /root/mmbot/mmbot_py/main.py
+Restart=always
+User=root
+WorkingDirectory=/root/mmbot/mmbot_py/
+
+[Install]
+WantedBy=multi-user.target

@@ -45,7 +45,11 @@ def handle_new(bot: MyBot, ctx: MessageHandlerContext, msg_text: str,):
     # 添加当前消息
     msg.append({"role": "user", "content": cmd})
 
-    chat_completion = openai_client.chat.completions.create(messages=msg, model="gpt-3.5-turbo")
+    chat_completion = openai_client.chat.completions.create(
+        messages=msg,
+        model="gpt-3.5-turbo",
+        max_tokens=10000,
+    )
     reply = chat_completion.choices[0].message.content
 
     # 保存历史记录
