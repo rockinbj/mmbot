@@ -21,10 +21,12 @@ def handle(
 
 def handle_new(bot: MyBot, ctx: MessageHandlerContext, msg_text: str,):
     cmd = msg_text.lower()
-    openai_client = OpenAI(api_key='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')
-    path_data = Path(__file__).resolve().parent.parent.parent.parent/'data'
+    path_root = Path(__file__).resolve().parent.parent.parent.parent
+    path_data = path_root/'data'
     file_prompt = path_data/'prompt.txt'
     file_hist = path_data/'chat_history.txt'
+    file_openai_key = path_root/'config'/'openai_key'
+    openai_client = OpenAI(api_key=file_openai_key.read_text().strip())
 
     # 读取历史记录
     if file_hist.exists():
