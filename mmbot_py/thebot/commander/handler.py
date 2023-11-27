@@ -30,7 +30,8 @@ def handle_new(bot: MyBot, ctx: MessageHandlerContext, msg_text: str,):
 
     # 重置历史对话
     if cmd == '7890909':
-        file_hist.rename(f'chat_history.txt.{int(time.time())}')
+        file_hist.rename(path_data/f'chat_history.{int(time.time())}')
+        print(f'reset chat_history.txt OK.')
         return
 
     # 读取历史记录
