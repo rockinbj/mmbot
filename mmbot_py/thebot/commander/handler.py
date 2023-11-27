@@ -1,6 +1,5 @@
 import time
 from pathlib import Path
-
 from openai import OpenAI
 from thebot.my_bot import MyBot
 from thebot.types import MessageHandlerContext
@@ -28,11 +27,15 @@ def handle_new(bot: MyBot, ctx: MessageHandlerContext, msg_text: str,):
     file_hist = path_data/'chat_history.txt'
     file_openai_key = path_root/'config'/'openai_key'
 
-    # 重置历史对话
-    if cmd == '7890909':
-        file_hist.rename(path_data/f'chat_history.{int(time.time())}')
-        print(f'reset chat_history.txt OK.')
-        return
+    # 特殊指令
+    match cmd:
+        case '/???':
+            bot.add_replying_markdown_message(ctx, (path_data/'help.txt').read_text())
+            return
+        case '7890909':
+            file_hist.rename(path_data/f'chat_history.{int(time.time())}')
+            print(f'reset chat_history.txt OK.')
+            return
 
     # 读取历史记录
     if file_hist.exists():
