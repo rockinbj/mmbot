@@ -49,8 +49,8 @@ def handle_new(bot: MyBot, ctx: MessageHandlerContext, msg_text: str,):
 
     chat_completion = openai_client.chat.completions.create(
         messages=msg,
-        model="gpt-3.5-turbo",
-        max_tokens=10000,
+        model="gpt-3.5-turbo-16k",
+        # max_tokens=10000,
     )
     reply = chat_completion.choices[0].message.content
 
