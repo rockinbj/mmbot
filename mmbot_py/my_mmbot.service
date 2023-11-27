@@ -5,7 +5,7 @@ Description=Trading Service Reporter
 [Service]
 Type=simple
 # anaconda python executor
-ExecStart=ExecStart=/opt/miniconda/envs/mmbot/bin/python /root/mmbot/mmbot_py/main.py
+ExecStart=/opt/miniconda/envs/mmbot/bin/python /root/mmbot/mmbot_py/main.py
 StandardOutput=append:/root/mmbot/data/logs/乐乐和她的好朋友.log
 StandardError=append:/root/mmbot/data/logs/乐乐和她的好朋友.log
 Restart=always
