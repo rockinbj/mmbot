@@ -1,3 +1,4 @@
+import time
 from pathlib import Path
 
 from openai import OpenAI
@@ -26,7 +27,11 @@ def handle_new(bot: MyBot, ctx: MessageHandlerContext, msg_text: str,):
     file_prompt = path_data/'prompt.txt'
     file_hist = path_data/'chat_history.txt'
     file_openai_key = path_root/'config'/'openai_key'
-    openai_client = OpenAI(api_key=file_openai_key.read_text().strip())
+
+    # 重置历史对话
+    if cmd == '7890909':
+        file_hist.rename(f'chat_history.txt.{int(time.time())}')
+        return
 
     # 读取历史记录
     if file_hist.exists():
@@ -47,6 +52,7 @@ def handle_new(bot: MyBot, ctx: MessageHandlerContext, msg_text: str,):
     # 添加当前消息
     msg.append({"role": "user", "content": cmd})
 
+    openai_client = OpenAI(api_key=file_openai_key.read_text().strip())
     chat_completion = openai_client.chat.completions.create(
         messages=msg,
         model="gpt-3.5-turbo-16k",
