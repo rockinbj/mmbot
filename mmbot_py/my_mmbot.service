@@ -1,12 +1,19 @@
+# copy this file to /etc/systemd/system/
 [Unit]
-Description=Trading Service Main
+Description=Trading Service Reporter
 
 [Service]
 Type=simple
-ExecStart=/opt/miniconda/envs/mmbot/bin/python /root/mmbot/mmbot_py/main.py
+# anaconda python executor
+ExecStart=ExecStart=/opt/miniconda/envs/mmbot/bin/python /root/mmbot/mmbot_py/main.py
+StandardOutput=append:/root/mmbot/data/logs/乐乐和她的好朋友.log
+StandardError=append:/root/mmbot/data/logs/乐乐和她的好朋友.log
 Restart=always
 User=root
+# reporter working directory
 WorkingDirectory=/root/mmbot/mmbot_py/
+RestartSec=10s
+StartLimitInterval=0
 
 [Install]
 WantedBy=multi-user.target
